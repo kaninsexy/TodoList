@@ -9,12 +9,18 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import useToggleState from './useToggleState';
+import EditTodoForm from './EditTodoForm';
 function Todo(props) {
   const [isEditing, toggle] = useToggleState(false);
   return (
     <ListItem>
       {isEditing ? (
-        <h1>Edit</h1>
+        <EditTodoForm
+          editTodo={props.editTodo}
+          task={props.task}
+          id={props.id}
+          toggleEditForm={toggle}
+        ></EditTodoForm>
       ) : (
         <>
           <Checkbox
@@ -39,8 +45,8 @@ function Todo(props) {
                 onClick={() => props.removeTodo(props.id)}
               ></DeleteIcon>
             </IconButton>
-            <IconButton>
-              <EditIcon aria-label='Edit'></EditIcon>
+            <IconButton aria-label='Edit' onClick={toggle}>
+              <EditIcon></EditIcon>
             </IconButton>
           </ListItemSecondaryAction>
         </>

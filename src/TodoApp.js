@@ -17,12 +17,19 @@ function TodoApp() {
     setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: true }]);
   };
   const removeTodo = (todoId) => {
+    console.log(todoId);
     const updatedTodos = todos.filter((todo) => todo.id !== todoId);
     setTodos(updatedTodos);
   };
   const toggleTodo = (todoId) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+  const editTodo = (todoId, newTask) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === todoId ? { ...todo, task: newTask } : todo
     );
     setTodos(updatedTodos);
   };
@@ -49,6 +56,7 @@ function TodoApp() {
             todos={todos}
             removeTodo={removeTodo}
             toggleTodo={toggleTodo}
+            editTodo={editTodo}
           ></TodoList>
         </Grid>
       </Grid>

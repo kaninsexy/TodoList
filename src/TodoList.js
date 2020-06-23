@@ -19,6 +19,7 @@ function TodoList(props) {
                   completed={todo.completed}
                   removeTodo={props.removeTodo}
                   toggleTodo={props.toggleTodo}
+                  editTodo={props.editTodo}
                 ></Todo>
               </>
               <Divider></Divider>
