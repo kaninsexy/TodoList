@@ -6,17 +6,24 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
+import { v4 as uuidv4 } from 'uuid';
 function TodoApp() {
   const testTodos = [
     { id: 1, task: 'Sleep', completed: true },
     { id: 2, task: 'Wake Up', completed: false },
   ];
-  const [todos, setTodos] = useState(testTodos);
+  const [todos, setTodos] = useState([]);
   const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: 3, task: newTodoText, completed: true }]);
+    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: true }]);
   };
   const removeTodo = (todoId) => {
     const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+    setTodos(updatedTodos);
+  };
+  const toggleTodo = (todoId) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+    );
     setTodos(updatedTodos);
   };
   return (
@@ -38,7 +45,11 @@ function TodoApp() {
       <Grid container justify='center' style={{ marginTop: '1rem' }}>
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo}></TodoForm>
-          <TodoList todos={todos} removeTodo={removeTodo}></TodoList>
+          <TodoList
+            todos={todos}
+            removeTodo={removeTodo}
+            toggleTodo={toggleTodo}
+          ></TodoList>
         </Grid>
       </Grid>
     </Paper>
