@@ -8,13 +8,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import { v4 as uuidv4 } from 'uuid';
 function TodoApp() {
-  const testTodos = [
-    { id: 1, task: 'Sleep', completed: true },
-    { id: 2, task: 'Wake Up', completed: false },
-  ];
   const [todos, setTodos] = useState([]);
   const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: true }]);
+    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
   };
   const removeTodo = (todoId) => {
     console.log(todoId);

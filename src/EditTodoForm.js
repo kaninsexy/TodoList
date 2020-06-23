@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 import useInputState from './useInputState';
-function EditTodoForm(editTodo, id, toggleEditForm, task) {
+function EditTodoForm({ id, task, editTodo, toggleEditForm }) {
   const [value, handleChange, reset] = useInputState(task);
   return (
     <form
@@ -11,13 +11,15 @@ function EditTodoForm(editTodo, id, toggleEditForm, task) {
         reset();
         toggleEditForm();
       }}
+      style={{ marginLeft: '1rem', width: '50%' }}
     >
       <TextField
         margin='normal'
         value={value}
         onChange={handleChange}
         fullWidth
-      ></TextField>
+        autoFocus
+      />
     </form>
   );
 }
